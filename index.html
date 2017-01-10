@@ -19,6 +19,7 @@
     <![endif]-->
   </head>
   <body>
+
     <div id="firstLook">
       <h1>Movie Collection</h1>
       <nav class="navbar navbar-default fixedNav">
@@ -36,10 +37,75 @@
        </div>
     </div>  <!-- end container  -->
     <div id="movieList"></div>
+
+    <div class="container">
+      <article id="game-container">
+      <!-- REGISTRATION PAGE -->
+        <section id="title-screen" class="card card--registration">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Registration</h1>
+            </div>
+            <div class="col-md-12">
+              <div class="card__button">
+                <a class="card__link btn btn--big btn--orange bottom"
+                   href="#"
+                   next="card--search">
+                  <span class="btn__prompt"></span>
+                  <span class="btn__text">Next</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="title-screen" class="card card--search">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Search</h1>
+            </div>
+            <div class="col-md-12">
+              <div class="card__button">
+                <a class="card__link btn btn--big btn--orange bottom"
+                   href="#"
+                   next="card--toWatch">
+                  <span class="btn__prompt"></span>
+                  <span class="btn__text">Next</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="title-screen" class="card card--toWatch">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Going to Watch</h1>
+            </div>
+            <div class="col-md-12">
+              <div class="card__button">
+                <a class="card__link btn btn--big btn--orange bottom"
+                   href="#"
+                   next="card--haveWatched">
+                  <span class="btn__prompt"></span>
+                  <span class="btn__text">Next</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="title-screen" class="card card--haveWatched">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Watched</h1>
+            </div>
+          </div>
+        </section>
+      </article>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="page.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
