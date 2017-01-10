@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
     <link rel="stylesheet" href="movie.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,6 +19,25 @@
     <![endif]-->
   </head>
   <body>
+
+    <div id="firstLook">
+      <h1>Movie Collection</h1>
+      <nav class="navbar navbar-default fixedNav">
+        <ul>
+          <li><a class="card__link" href="#" next="movieList">Find New Movies</a></li>
+          <li>Search Your Movies</li>
+          <li>Login/Register/Logout</li>
+        </ul>
+      </nav>
+    </div>
+     <div class="cointainer">
+       <div class="movieList">
+       <input type="Search" name="Movie Title" >
+       <button id="search">Search</button>
+       </div>
+    </div>  <!-- end container  -->
+    <div id="movieList"></div>
+
     <div class="container">
       <article id="game-container">
       <!-- REGISTRATION PAGE -->
