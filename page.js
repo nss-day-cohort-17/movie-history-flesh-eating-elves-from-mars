@@ -8,6 +8,7 @@ James Wier
 $(document).ready(function() {
   /* Show the initial registration page ========================== */
   $("#title-screen").show();
+  $('#main-nav').hide();
   /* When any button with card__link class is clicked, move on to the next view. */
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
@@ -65,6 +66,7 @@ $(document).ready(function() {
     $(".card").hide();
     console.log("card hidden");
     $(".card--search").show();
+    $('#main-nav').show();
   });
 });
 //END
