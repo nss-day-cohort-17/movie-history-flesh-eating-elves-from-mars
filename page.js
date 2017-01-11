@@ -58,15 +58,16 @@ $(document).ready(function() {
   /* login page button ============================================= */
   $("#loginPage").click(function(e) {
     $(".card").hide();
+    $('#main-nav').hide();
     console.log("card hidden");
     $("#title-screen").show();
   });
   /* login button ================================================== */
   $("#login").click(function(e) {
     $(".card").hide();
+    $('#main-nav').show();
     console.log("card hidden");
     $(".card--search").show();
-    $('#main-nav').show();
   });
 });
 //END
