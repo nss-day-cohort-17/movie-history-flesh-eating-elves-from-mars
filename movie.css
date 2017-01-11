@@ -1,37 +1,55 @@
-
-body {
-  background-color: lightblue;
-}
-.test {
-  border: 1px solid black;
-  background-color: #ffb4b0;
-  padding: 1em ;
-  box-sizing: border-box;
-  text-align: left;
-  list-style: none;
-  display: inline-block;
- }
-
-#title-screen{
-  height:650px;
-}
 /*
-  Section styles
- */
+Team Excercise Cohort 17
+John McCutchan
+Krishnapriya Sivasubramanian
+James Wier
+*/
+/* Sructure ============================== */
+#title-screen{ /* Section */
+  height:900px;
+}
 .card {
   display: none;
 }
-
 .card__prompt {
   font-size: 1.1em;
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
 }
-
 .card__button {
   font-size: 1.1em;
   margin: 30px 0 0 0;
   text-align: center;
 }
-
+.movieCard{ /* Movie box */
+  height:600px;
+  margin-bottom: 20px;
+}
+.titleBar{ /* H1 on each page */
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+#movieTitle{ /* Input field for search */
+  width: 300px;
+}
+.topMargin{ /* A spacer */
+  margin-top: 40px;
+}
+/* Skin ============================== */
+body {
+  background-color: rgba(52, 73, 94,1.0);
+}
+.movieCard{
+  background-color: rgba(236, 240, 241,1.0);
+  border: 1px solid rgba(52, 73, 94,1.0);
+  border-radius:5px;
+}
+.titleBar{
+  background-color:rgba(236, 240, 241,1.0);
+  border-radius:5px;
+}
+.white{
+  color:rgba(236, 240, 241,1.0);
+}
+/* Breakpoints ============================== */
