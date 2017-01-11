@@ -27,7 +27,31 @@ function movieFactory () {
       console.log(data)
       card(data);
       $("#movieList").html (movieList);
+      return data
+    })
+    .then (function (data) {
+      $(".movieCard").click(function (e){
+        // console.log(e)
+        // console.log(e.target.parentNode.childNodes[1].innerHTML )
+        console.log("hi")
+        movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
+        console.log(movieTitle)
+        titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
+        return new Promise (function (resolve,reject){
+          $.ajax ({
+            url: titleURL
+          })
+          .then (function (data){
+            resolve (data);
+            console.log(data)
+            $("#movieList").html(`<div>${data.Actors}</div>`)
+          })
+
+  })
+
     })
   })
+})
 }
 /* END ================================================= */
+//ajax call for getting actors name on click on each card

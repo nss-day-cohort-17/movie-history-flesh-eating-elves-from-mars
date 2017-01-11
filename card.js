@@ -10,6 +10,7 @@ var movieList = "";
 //
 /* Card template =============================================== */
 function card(data) {
+  movieList = "";
   //movieList += `<div class="row"`
   for (var i=0 ; i < data.Search.length; i++){
     movieList += `
