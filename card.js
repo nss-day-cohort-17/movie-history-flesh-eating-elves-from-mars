@@ -11,7 +11,12 @@ var modalCard = "";
 //
 /* Card template =============================================== */
 function card(data) {
-  movieList ="";
+
+  movieList = "";
+  
+
+ 
+
   for (var i=0 ; i < data.Search.length; i++){
 
     movieList += `
