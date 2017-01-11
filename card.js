@@ -13,10 +13,6 @@ var modalCard = "";
 function card(data) {
 
   movieList = "";
-  
-
- 
-
   for (var i=0 ; i < data.Search.length; i++){
 
     movieList += `
@@ -30,13 +26,14 @@ function card(data) {
 }
 /* Modal Card ================================================== */
 function modalCardBuilder(data) {
+  modalCard = "";
   modalCard += `
                 <div class="col-md-4 movieCard">
                   <h3>${data.Title}</h3>
                   <p>Released: ${data.Released}</p>
                   <p>Rating: ${data.imdbRating}
                   <p>Cast: ${data.Actors}
-                  <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="" />
+                  <img class="img-responsive center-block" src= ${data.Poster} alt="" />
                 </div>`
   return modalCard;
 }
