@@ -19,7 +19,7 @@ function card(data) {
                   <div class="col-md-4 movieCard">
                     <h3>${data.Search[i].Title}</h3>
                     <p>Year: ${data.Search[i].Year}</p>
-                    <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="" />
+                    <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="Poster " />
                   </div>`
   }
   return movieList;
