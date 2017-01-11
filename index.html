@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Movie History - Flesh Eating Elves From Mars</title>
-
     <!-- Bootstrap -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-
+    <!-- Project CSS -->
     <link rel="stylesheet" href="movie.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,88 +18,79 @@
     <![endif]-->
   </head>
   <body>
-
-    <div id="firstLook">
-      <h1>Movie Collection</h1>
-      <nav class="navbar navbar-default fixedNav">
-        <ul>
-          <li><a class="card__link" href="#" next="movieList">Find New Movies</a></li>
-          <li>Search Your Movies</li>
-          <li>Login/Register/Logout</li>
-        </ul>
-      </nav>
-    </div>
-     <div class="cointainer">
-       <div class="movieList">
-       <input type="Search" name="Movie Title" >
-       <button id="search">Search</button>
-       </div>
-    </div>  <!-- end container  -->
-    <div id="movieList"></div>
-
+  <!--
+  Team Excercise Cohort 17
+  John McCutchan
+  Krishnapriya Sivasubramanian
+  James Wier
+  -->
     <div class="container">
-      <article id="game-container">
+      <article id="app-container">
       <!-- REGISTRATION PAGE -->
         <section id="title-screen" class="card card--registration">
           <div class="row">
-            <div class="col-md-12">
-              <h1>Registration</h1>
-              <img src="images/team-logo.png" alt="">
+            <div class="col-md-6">
+              <h1 class="topMargin white">MyMovies&trade;</h1>
+              <p class="white">MyMovie&trade; is an application that allows the user to register for a unique account, add movies that they are interestedin, and sort them by watched and unwatched. There is also a feature to allow rating of the individual movies form 0 to 5.</p>
+              <button type="button" id="login" class="btn btn-default navbar-btn">Login</button>
             </div>
-            <div class="col-md-12">
-              <div class="card__button">
-                <a class="card__link btn btn--big btn--orange bottom"
-                   href="#"
-                   next="card--search">
-                  <span class="btn__prompt"></span>
-                  <span class="btn__text">Next</span>
-                </a>
-              </div>
+            <div class="col-md-6">
+               <img class="topMargin img-responsive center-block" src="images/team-logo.png" alt="">
             </div>
           </div>
         </section>
+        <!-- Primary Nav -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">MyMovies&trade;</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><button type="button" id="findNewMovies" class="btn btn-default navbar-btn">Search For Movies</button></li>
+                <li><button type="button" id="findUnWatchedMovies" class="btn btn-default navbar-btn">Unwatched Movies</button></li>
+                <li><button type="button" id="findWatchedMovies" class="btn btn-default navbar-btn">Watched Movies</button></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><button type="button" id="loginPage" class="btn btn-default navbar-btn">Login/Register/Logout</button></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav><!-- /.navbar navbar-default -->
+        <!-- SEARCH MOVIES PAGE -->
         <section id="title-screen" class="card card--search">
           <div class="row">
-            <div class="col-md-12">
-              <h1>Search</h1>
+            <div class="col-md-12 titleBar">
+              <h1>Search for Movies</h1>
               <div class="movieList">
-                <input type="Search" name="Movie Title" >
+                <input type="Search" id="movieTitle" name="Movie Title">
                 <button id="search">Search</button>
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="card__button">
-                <a class="card__link btn btn--big btn--orange bottom"
-                   href="#"
-                   next="card--toWatch">
-                  <span class="btn__prompt"></span>
-                  <span class="btn__text">Next</span>
-                </a>
-              </div>
-            </div>
+            <div id="movieList"></div>
           </div>
         </section>
+        <!-- UNWATCHED MOVIES PAGE -->
         <section id="title-screen" class="card card--toWatch">
           <div class="row">
-            <div class="col-md-12">
-              <h1>Going to Watch</h1>
-            </div>
-            <div class="col-md-12">
-              <div class="card__button">
-                <a class="card__link btn btn--big btn--orange bottom"
-                   href="#"
-                   next="card--haveWatched">
-                  <span class="btn__prompt"></span>
-                  <span class="btn__text">Next</span>
-                </a>
-              </div>
+            <div class="col-md-12 titleBar">
+              <h1>Unwatched Movies</h1>
             </div>
           </div>
         </section>
+        <!-- WATCHED MOVIES PAGE -->
         <section id="title-screen" class="card card--haveWatched">
           <div class="row">
-            <div class="col-md-12">
-              <h1>Watched</h1>
+            <div class="col-md-12 titleBar">
+              <h1>Watched Movies</h1>
             </div>
           </div>
         </section>
@@ -111,6 +101,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="page.js"></script>
+    <script src="card.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
