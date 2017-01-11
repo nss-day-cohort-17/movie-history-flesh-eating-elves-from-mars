@@ -44,7 +44,8 @@ function movieFactory () {
           .then (function (data){
             resolve (data);
             console.log(data)
-            $("#movieList").html(`<div>${data.Actors}</div>`)
+            modalCardBuilder(data);
+            $("#movieList").html(modalCard)
           })
 
   })
