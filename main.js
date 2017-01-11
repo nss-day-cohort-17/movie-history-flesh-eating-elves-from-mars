@@ -33,26 +33,39 @@ function movieFactory () {
       $(".movieCard").click(function (e){
         // console.log(e)
         // console.log(e.target.parentNode.childNodes[1].innerHTML )
-        console.log("hi")
+        // console.log("hi")
         movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
-        console.log(movieTitle)
+
         titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
         return new Promise (function (resolve,reject){
           $.ajax ({
             url: titleURL
           })
+
           .then (function (data){
             resolve (data);
             console.log(data)
-            modalCardBuilder(data);
+            modalCardBuilder(data)
             $("#movieList").html(modalCard)
+            watched(data)
           })
 
-  })
+        })
 
+      })
     })
-  })
+
 })
 }
-/* END ================================================= */
-//ajax call for getting actors name on click on each card
+//store json to watched database
+function watched (data){
+  $("#watched").click (function () {
+    $.ajax({
+      url: "https://watchedmovies-310b6.firebaseio.com/.json",
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: "json"
+    })
+
+  })
+}
