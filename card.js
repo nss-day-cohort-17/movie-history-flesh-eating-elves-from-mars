@@ -19,7 +19,7 @@ function card(data) {
                   <div class="col-md-4 movieCard">
                     <h3>${data.Search[i].Title}</h3>
                     <p>Year: ${data.Search[i].Year}</p>
-                    <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="Poster " />
+                    <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="Poster not available " />
                   </div>`
   }
   return movieList;
@@ -33,7 +33,7 @@ function modalCardBuilder(data) {
                   <p>Released: ${data.Released}</p>
                   <p>Rating: ${data.imdbRating}
                   <p>Cast: ${data.Actors}
-                  <img class="img-responsive center-block" src= ${data.Poster} alt="" />
+                  <img class="img-responsive center-block" src= ${data.Poster} alt="Poster not available " />
                 </div>`
   return modalCard;
 }
