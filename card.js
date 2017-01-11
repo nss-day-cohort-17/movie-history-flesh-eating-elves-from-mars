@@ -11,7 +11,9 @@ var movieList = "";
 /* Card template =============================================== */
 function card(data) {
   //movieList += `<div class="row"`
+  movieList ="";
   for (var i=0 ; i < data.Search.length; i++){
+
     movieList += `
                   <div class="col-md-4 movieCard">
                   <h3>${data.Search[i].Title}</h3>
