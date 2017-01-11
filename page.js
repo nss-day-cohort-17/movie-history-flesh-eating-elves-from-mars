@@ -6,7 +6,7 @@ James Wier
 */
 /* Navigates through pages using show and hide attributes ======== */
 $(document).ready(function() {
-  /* Show the initial registration page ============================ */
+  /* Show the initial registration page ========================== */
   $("#title-screen").show();
   /* When any button with card__link class is clicked, move on to the next view. */
   $(".card__link").click(function(e) {
@@ -31,25 +31,40 @@ $(document).ready(function() {
     }
   });
   /* When the back button clicked, move back a view */
-  $(".card__back").click(function(e) {
-    var previousCard = $(this).attr("previous");
+  // $(".card__back").click(function(e) {
+  //   var previousCard = $(this).attr("previous");
+  //   $(".card").hide();
+  //   $("." + previousCard).show();
+  // });
+  /* findNewMovies button ========================================== */
+  $("#findNewMovies").click(function(e) {
     $(".card").hide();
-    $("." + previousCard).show();
+    console.log("find new movies screen");
+    $(".card--search").show();
+  });
+  /* findUnWatchedMovies button ==================================== */
+  $("#findUnWatchedMovies").click(function(e) {
+    $(".card").hide();
+    console.log("unwatched movies screen");
+    $(".card--toWatch").show();
+  });
+  /* findWatchedMovies button ====================================== */
+  $("#findWatchedMovies").click(function(e) {
+    $(".card").hide();
+    console.log("have watched movies screen");
+    $(".card--haveWatched").show();
+  });
+  /* login page button ============================================= */
+  $("#loginPage").click(function(e) {
+    $(".card").hide();
+    console.log("card hidden");
+    $("#title-screen").show();
+  });
+  /* login button ================================================== */
+  $("#login").click(function(e) {
+    $(".card").hide();
+    console.log("card hidden");
+    $(".card--search").show();
   });
 });
-
-
-
-
-
-
-
-
-
-
-/* When the back button clicked, move back a view ================= */
-$(".card__back").click(function(e) {
-  var previousCard = $(this).attr("previous");
-  $(".card").hide();
-  $("." + previousCard).show();
-});
+//END
