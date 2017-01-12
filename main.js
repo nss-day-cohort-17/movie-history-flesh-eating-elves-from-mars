@@ -60,12 +60,17 @@ function movieFactory () {
 //store json to watched database
 function watched (data){
   $("#watched").click (function () {
+    var jsonData = {}
+    jsonData = data;
+    jsonData.boolean = true;
+    console.log(jsonData)
     $.ajax({
       url: "https://watchedmovies-310b6.firebaseio.com/.json",
       type: "POST",
       data: JSON.stringify(data),
       dataType: "json"
     })
-
+    alert("added to watched database")
+    movieFactory()
   })
 }
