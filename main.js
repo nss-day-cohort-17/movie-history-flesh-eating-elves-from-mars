@@ -10,12 +10,20 @@ console.log("Start");
 var movieName ="";
 //
 /* Search listener ===================================== */
-$("#search").click( function () {
+// $("#search").click(function (e) {
+//   movieName = $("input").val();
+//   console.log(movieName);
+//   movieFactory();
+//   e.preventDefault();
+// });
+
+$("#target").submit(function (e) {
   movieName = $("input").val();
   console.log(movieName);
   movieFactory();
-})
-//
+  e.preventDefault();
+});
+
 /* Ajax call for API =================================== */
 function movieFactory () {
   return new Promise (function (resolve,reject){
