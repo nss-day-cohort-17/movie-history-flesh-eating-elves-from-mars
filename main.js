@@ -62,7 +62,7 @@ function watched (data){
   $("#watched").click (function () {
     var jsonData = {}
     jsonData = data;
-    jsonData.boolean = true;
+    jsonData.watched = true;
     console.log(jsonData)
     $.ajax({
       url: "https://watchedmovies-310b6.firebaseio.com/.json",
@@ -74,3 +74,28 @@ function watched (data){
     movieFactory()
   })
 }
+
+//ajax call to get json data from watched database
+
+// function getWatched (data) {
+//   return new Promise (function (resolve,reject){
+//     $.ajax({
+//     url: "https://watchedmovies-310b6.firebaseio.com/.json",
+//     data: JSON.stringify(data),
+//     dataType: "json"
+//   })
+//     .then (function(data){
+//       console.log(data)
+//       resolve(data)
+//       var watchedDatabase ="";
+//       for(var uniqueId in data){
+//         uniqueId = _.findKey (data,{watched : true})
+//         watchedDatabase += $(".card--haveWatched ").html(`<div>${uniqueId.Actors}</div>`)//working on this line
+//       console.log(watchedDatabase)
+//     }
+
+//     })
+//   })
+
+// }
+// getWatched()
