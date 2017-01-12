@@ -10,6 +10,7 @@
     <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Modal Css -->
     <link rel="stylesheet" href="jquery.modal.css" type="text/css" media="screen" />
+    <!--<link href="/bower_components/firebase/firebase.js">-->
     <!-- Project CSS -->
     <link rel="stylesheet" href="movie.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -34,7 +35,26 @@
             <div class="col-md-6">
               <h1 class="topMargin white">MyMovies&trade;</h1>
               <p class="white">MyMovie&trade; is an application that allows you to register for a unique account, add movies that you are interested in, and sort them by watched and unwatched. There is also a feature to allow you to rate individual movies form 0 to 5.</p>
-              <button type="button" id="login" class="btn btn-default navbar-btn">Login</button>
+              <form id="auth">
+                <div class="form-group">
+
+
+
+                      <label>Email:</label><br>
+                      <input class="form-control" type="email" name="email">
+
+
+                      <label>Password:</label><br>
+                      <input class="form-control" type="password" name="password">
+
+
+                    <input id="submitButton" type="submit" value="Submit">
+
+                    <!--<button type="submit" value="Submit" class="btn btn-primary login">Login</button>-->
+
+                </div>
+              </form>
+              <button class="btn btn-warning register">Register</button>
             </div>
             <div class="col-md-6">
                <img class="topMargin img-responsive center-block" src="images/team-logo.png" alt="">
@@ -68,7 +88,7 @@
           </div><!-- /.container-fluid -->
         </nav><!-- /.navbar navbar-default -->
         <!-- SEARCH MOVIES PAGE -->
-        <section id="title-screen" class="card card--search">
+        <section id="search-screen" class="card card--search">
           <div class="row">
             <div class="col-md-12 titleBar">
               <h1>Search for Movies</h1>
@@ -81,7 +101,7 @@
           </div>
         </section>
         <!-- UNWATCHED MOVIES PAGE -->
-        <section id="title-screen" class="card card--toWatch">
+        <section id="unwatched-screen" class="card card--toWatch">
           <div class="row">
             <div class="col-md-12 titleBar">
               <h1>Unwatched Movies</h1>
@@ -93,7 +113,7 @@
           </div>
         </section>
         <!-- WATCHED MOVIES PAGE -->
-        <section id="title-screen" class="card card--haveWatched">
+        <section id="watched-screen" class="card card--haveWatched">
           <div class="row">
             <div class="col-md-12 titleBar">
               <h1>Watched Movies</h1>
@@ -106,6 +126,7 @@
         </section>
       </article>
     </div>
+    <script src="/bower_components/firebase/firebase.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -113,6 +134,7 @@
     <!-- <script type="text/javascript" src="/bower_components/lodash/dist/lodash.js"></script> -->
     <script src="jquery.modal.js" type="text/javascript" charset="utf-8"></script>
     <script src="page.js"></script>
+    <script src="auth.js"></script>
     <script src="card.js"></script>
     <script src="main.js"></script>
   </body>

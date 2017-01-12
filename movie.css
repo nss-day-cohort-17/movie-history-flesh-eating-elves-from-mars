@@ -52,4 +52,10 @@ body {
 .white{
   color:rgba(236, 240, 241,1.0);
 }
+label{
+  color:white;
+}
+legend{
+  color:white;
+}
 /* Breakpoints ============================== */
