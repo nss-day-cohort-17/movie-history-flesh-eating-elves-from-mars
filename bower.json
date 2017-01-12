@@ -15,6 +15,11 @@
     "tests"
   ],
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "bootstrap": "^3.3.7",
+    "lodash": "^4.17.4",
+>>>>>>> a4c0daa4d691c684dbd34be87731aee3f74d611f
     "firebase": "^3.6.5"
   }
 }

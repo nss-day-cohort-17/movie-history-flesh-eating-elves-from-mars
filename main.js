@@ -5,14 +5,22 @@ Krishnapriya Sivasubramanian
 James Wier
 */
 console.log("Start");
+firebase.initializeApp(
+                      {
+                          apiKey: "AIzaSyCOBC_SsQ2VUsNGgw-W6HHljtmHr7l146A",
+                          authDomain: "watchedmovies-310b6.firebaseapp.com",
+                          databaseURL: "https://watchedmovies-310b6.firebaseio.com",
+                          storageBucket: "watchedmovies-310b6.appspot.com",
+                          messagingSenderId: "641830258262"
+                        })
 //
 /* Globals ============================================= */
 var movieName ="";
 //
+
 /* Search listener ===================================== */
 $("#search").click( function () {
   movieName = $("input").val();
-  console.log(movieName);
   movieFactory();
 })
 //
@@ -64,8 +72,9 @@ function watched (data){
     jsonData = data;
     jsonData.watched = true;
     console.log(jsonData)
+    var uid= firebase.auth().currentUser.uid
     $.ajax({
-      url: "https://watchedmovies-310b6.firebaseio.com/.json",
+      url: "https://watchedmovies-310b6.firebaseio.com/${uid}.json",
       type: "POST",
       data: JSON.stringify(data),
       dataType: "json"
@@ -99,3 +108,27 @@ function watched (data){
 
 // }
 // getWatched()
+//register button working
+$("#register").click ((e) => {
+  e.preventDefault();
+  var email = $(".getEmail").val();
+  var password = $(".getPassword").val();
+  if ((email !== "")&& (password !== "")){
+  firebase.auth().createUserWithEmailAndPassword(email,password)
+} else {
+  alert("hi")
+}
+})
+//login button
+
+$("#login").click((e)=>{
+  e.preventDefault();
+  var email = $(".getEmail").val();
+  var password = $(".getPassword").val();
+  firebase
+  .auth()
+  .signInWithEmailAndPassword(email, password)
+  .then(() => {
+    $("form")[0].reset()
+  })
+})
