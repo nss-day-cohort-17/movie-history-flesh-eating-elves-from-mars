@@ -51,6 +51,7 @@ function watchedCard(data) {
     console.log(currentObj)
     for (let key in currentObj) {
       console.log(currentObj[key])
+      if (currentObj[key].watched === true ){
       watchedMovieList += `
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
@@ -59,6 +60,30 @@ function watchedCard(data) {
                     <p>My Rating:</p>
                   </div>`
     }
+
     $("#watchedList").html (watchedMovieList);
   }
+}
+}
+
+function unWatchedCard(data) {
+  unWatchedMovieList = "";
+  var UID = firebase.auth().currentUser.uid;
+  for (let each in data) {
+    var currentObj = data[each];
+    console.log(currentObj)
+    for (let key in currentObj) {
+      console.log(currentObj[key])
+       if (currentObj[key].watched === false ){
+      unWatchedMovieList += `
+                  <div class="col-md-4 movieCard">
+                    <h3>Title: ${currentObj[key].Title}</h3>
+                    <p>Year:</p>
+                    <img class="img-responsive center-block" src= "" alt="Poster not available " />
+                    <p>My Rating:</p>
+                  </div>`
+    }
+    $("#toWatchList").html (unWatchedMovieList);
+  }
+}
 }
