@@ -17,7 +17,7 @@ firebase.initializeApp(config);
 /* Globals ============================================= */
 var movieName ="";
 var UID;
-$(document).tooltip();
+//$(document).tooltip();
 //
 /* Search listener ===================================== */
 
@@ -91,7 +91,6 @@ function watched (data){
     jsonData.watched = true;
     jsonData.rating = 0;
     console.log(jsonData)
-    UID = firebase.auth().currentUser.uid
     $.ajax({
       url: `https://fir-authent-jm.firebaseio.com/ + ${UID} + .json`,
       type: "POST",
@@ -124,6 +123,7 @@ $("#login").click((e)=>{
   .signInWithEmailAndPassword(email, password)
   .then(() => {
     $("form")[0].reset()
+    UID = firebase.auth().currentUser.uid;
   })
 })
 //add event listener for unwatched movies
@@ -135,7 +135,6 @@ function unWatchedMovies (data) {
     jsonData.watched = false;
     jsonData.rating = 0;
     console.log(jsonData)
-    UID = firebase.auth().currentUser.uid
     $.ajax({
       url: `https://fir-authent-jm.firebaseio.com/ + ${UID} + .json`,
       type: "POST",

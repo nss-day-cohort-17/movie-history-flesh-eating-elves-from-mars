@@ -48,7 +48,7 @@ $(document).ready(function() {
    $(".card").hide();
    console.log("unwatched movies screen");
    $(".card--toWatch").show();
-    $.getJSON('https://fir-authent-jm.firebaseio.com/.json', function(data){
+    $.getJSON(`https://fir-authent-jm.firebaseio.com/.json?orderBy="$key"`, function(data){
      console.log("Watched: ", data);
      unWatchedCard(data);
      $("#toWatchList").html(unWatchedMovieList);
@@ -59,7 +59,7 @@ $(document).ready(function() {
    $(".card").hide();
    console.log("have watched movies screen");
    $(".card--haveWatched").show();
-   $.getJSON('https://fir-authent-jm.firebaseio.com/.json', function(data){
+   $.getJSON(`https://fir-authent-jm.firebaseio.com/.json?orderBy="$key"`, function(data){
      watchedCard(data);
      // $("#watchedList").html(watchedMovieList);
    })

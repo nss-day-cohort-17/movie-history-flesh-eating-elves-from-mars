@@ -45,23 +45,26 @@ function modalCardBuilder(data) {
 function watchedCard(data) {
   watchedMovieList = "";
   console.log("OBJECT: ",data)
-  var UID = firebase.auth().currentUser.uid;
-  for (let each in data) {
-    var currentObj = data[each];
-    console.log(currentObj)
-    for (let key in currentObj) {
-      console.log(currentObj[key])
-      if (currentObj[key].watched === true ){
-      watchedMovieList += `
-                  <div class="col-md-4 movieCard">
-                    <h3>Title: ${currentObj[key].Title}</h3>
-                    <p>Year: ${currentObj[key].Year}</p>
-                    <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
-                    <button id="" class="btn btn-danger">Delete from List</button>
-                  </div>`
-    }
+  console.log("UID TEST: ",firebase.auth().currentUser.uid)
 
-    $("#watchedList").html (watchedMovieList);
+    console.log('begin loop')
+    for (let each in data) {
+      var currentObj = data[each];
+      console.log(currentObj)
+      for (let key in currentObj) {
+        console.log("Current Key", currentObj[key], "UID", UID)//============================
+        if (currentObj[key].watched === true ){
+        watchedMovieList += `
+                    <div class="col-md-4 movieCard">
+                      <h3>Title: ${currentObj[key].Title}</h3>
+                      <p>Year: ${currentObj[key].Year}</p>
+                      <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
+                      <button id="" class="btn btn-danger">Delete from List</button>
+                    </div>`
+        }
+
+      $("#watchedList").html (watchedMovieList);
+
   }
 }
 }
@@ -71,19 +74,20 @@ function unWatchedCard(data) {
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
-    console.log(currentObj)
+    console.log(data.id)
     for (let key in currentObj) {
       console.log(currentObj[key])
-       if (currentObj[key].watched === false ){
-      unWatchedMovieList += `
+      if(data.uid === firebase.auth().currentUser.uid)
+        if (currentObj[key].watched === false ){
+                  unWatchedMovieList += `
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
                     <p>Year: ${currentObj[key].Year}</p>
                     <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
                     <button id="" class="btn btn-primary">Watched</button>
                   </div>`
+        }
+      $("#toWatchList").html (unWatchedMovieList);
     }
-    $("#toWatchList").html (unWatchedMovieList);
   }
-}
 }
