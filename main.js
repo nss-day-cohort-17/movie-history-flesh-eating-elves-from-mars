@@ -17,6 +17,7 @@ firebase.initializeApp(config);
 /* Globals ============================================= */
 var movieName ="";
 var UID;
+$(document).tooltip();
 //
 /* Search listener ===================================== */
 $("#search").click( function (e) {
