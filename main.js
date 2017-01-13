@@ -24,6 +24,7 @@ $("#search").click( function (e) {
   console.log(movieName);
   e.preventDefault();
   movieFactory();
+
 })
 //
 /* Ajax call for API =================================== */
@@ -35,11 +36,6 @@ function movieFactory () {
     .then (function(data){
       resolve(data)
       console.log(data)
-
-
-      for(var i = 0; i < data.Search.length; i++){
-        if(data.Search[i].Title === current)
-      }
       card(data);
       $("#movieList").html (movieList);
       return data
@@ -60,9 +56,12 @@ function movieFactory () {
 
           .then (function (data){
             resolve (data);
-            console.log("LINE 57", data)
+            console.log(data)
             modalCardBuilder(data)
             $("#movieList").html(modalCard)
+            watched (data)
+            unWatchedMovies(data);
+
 
           })
 
@@ -89,33 +88,10 @@ function watched (data){
       dataType: "json"
     })
     alert("added to watched database");
+    movieFactory()
   })
 }
 
-//ajax call to get json data from watched database
-
-// function getWatched (data) {
-//   return new Promise (function (resolve,reject){
-//     $.ajax({
-//     url: "https://watchedmovies-310b6.firebaseio.com/.json",
-//     data: JSON.stringify(data),
-//     dataType: "json"
-//   })
-//     .then (function(data){
-//       console.log(data)
-//       resolve(data)
-//       var watchedDatabase ="";
-//       for(var uniqueId in data){
-//         uniqueId = _.findKey (data,{watched : true})
-//         watchedDatabase += $(".card--haveWatched ").html(`<div>${uniqueId.Actors}</div>`)//working on this line
-//       console.log(watchedDatabase)
-//     }
-
-//     })
-//   })
-
-// }
-// getWatched()
 //register button working
 $("#register").click ((e) => {
   e.preventDefault();
@@ -139,3 +115,23 @@ $("#login").click((e)=>{
     $("form")[0].reset()
   })
 })
+//add event listener for unwatched movies
+
+function unWatchedMovies (data) {
+  $("#addToWatchList").click (function (e) {
+    var jsonData = {}
+    jsonData = data;
+    jsonData.watched = false;
+    jsonData.rating = 0;
+    console.log(jsonData)
+    UID = firebase.auth().currentUser.uid
+    $.ajax({
+      url: `https://fir-authent-jm.firebaseio.com/ + ${UID} + .json`,
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: "json"
+    })
+    alert("added to Unwatched database");
+    movieFactory()
+  })
+}
