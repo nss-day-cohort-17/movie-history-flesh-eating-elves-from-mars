@@ -18,7 +18,7 @@ function card(data) {
   for (var i=0 ; i < data.Search.length; i++){
 
     movieList += `
-                  <div class="col-md-4 movieCard" id="movieCard${i}">
+                  <div class="col-md-4 movieCard" id="movieCard${i}" title="Click to open">
                     <h3>${data.Search[i].Title}</h3>
                     <p>Year: ${data.Search[i].Year}</p>
                     <img class="img-responsive center-block" src= ${data.Search[i].Poster} alt="Poster not available " />
