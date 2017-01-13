@@ -55,9 +55,9 @@ function watchedCard(data) {
       watchedMovieList += `
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
-                    <p>Year:</p>
-                    <img class="img-responsive center-block" src= "" alt="Poster not available " />
-                    <p>My Rating:</p>
+                    <p>Year: ${currentObj[key].Year}</p>
+                    <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
+                    <button id="" class="btn btn-danger">Delete from List</button>
                   </div>`
     }
 
@@ -78,9 +78,9 @@ function unWatchedCard(data) {
       unWatchedMovieList += `
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
-                    <p>Year:</p>
-                    <img class="img-responsive center-block" src= "" alt="Poster not available " />
-                    <p>My Rating:</p>
+                    <p>Year: ${currentObj[key].Year}</p>
+                    <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
+                    <button id="" class="btn btn-primary">Watched</button>
                   </div>`
     }
     $("#toWatchList").html (unWatchedMovieList);
