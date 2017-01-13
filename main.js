@@ -21,6 +21,7 @@ $("#target").submit(function (e) {
   movieName = $("input").val();
   console.log(movieName);
   movieFactory();
+  $("input").val("");
   e.preventDefault();
 });
 
