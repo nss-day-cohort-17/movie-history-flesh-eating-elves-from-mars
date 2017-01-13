@@ -54,6 +54,13 @@ $(document).ready(function() {
     $(".card").hide();
     console.log("have watched movies screen");
     $(".card--haveWatched").show();
+    $.getJSON('https://fir-authent-jm.firebaseio.com/.json', function(data){
+      console.log("Watched: ", data);
+      watchedCard(data);
+      $("#watchedList").html(watchedMovieList);
+    })
+
+
   });
   /* login page button ============================================= */
   $("#loginPage").click(function(e) {
@@ -61,6 +68,7 @@ $(document).ready(function() {
     $('#main-nav').hide();
     console.log("card hidden");
     $("#title-screen").show();
+    firebase.auth().signOut();
   });
   /* login button ================================================== */
   $("#login").click(function(e) {
@@ -69,5 +77,9 @@ $(document).ready(function() {
     console.log("card hidden");
     $(".card--search").show();
   });
+  /* logout button ================================================== */
+  $('#logout').click((e) => {
+  firebase.auth().signOut();
+  })
 });
 //END

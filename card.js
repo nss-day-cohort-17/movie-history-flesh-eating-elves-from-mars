@@ -8,6 +8,7 @@ James Wier
 /* Global Variables ============================================ */
 var movieList = "";
 var modalCard = "";
+var watchedMovieList = "";
 //
 /* Card template =============================================== */
 function card(data) {
@@ -39,4 +40,26 @@ function modalCardBuilder(data) {
                 </div>
                 <button id="watched">Watched</button> <button id="addToWatchList">Add to WatchList</button>`
   return modalCard;
+}
+function watchedCard(data) {
+  watchedMovieList = "";
+  console.log("OBJECT: ",data)
+  $.each(data, function( key, value){
+    var i = 0;
+
+
+      i += 1;
+    console.log("Inner", this);
+    console.log("Test Var");
+    watchedMovieList += `
+                  <div class="col-md-4 movieCard">
+                    <h3>Title</h3>
+                    <p>Year:</p>
+                    <img class="img-responsive center-block" src= "" alt="Poster not available " />
+                    <p>My Rating:</p>
+                  </div>`
+
+
+  })
+  return watchedMovieList;
 }
