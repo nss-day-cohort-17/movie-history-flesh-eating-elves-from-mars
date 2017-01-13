@@ -9,6 +9,7 @@ James Wier
 var movieList = "";
 var modalCard = "";
 var watchedMovieList = "";
+
 //
 /* Card template =============================================== */
 function card(data) {
@@ -44,22 +45,20 @@ function modalCardBuilder(data) {
 function watchedCard(data) {
   watchedMovieList = "";
   console.log("OBJECT: ",data)
-  $.each(data, function( key, value){
-    var i = 0;
-
-
-      i += 1;
-    console.log("Inner", this);
-    console.log("Test Var");
-    watchedMovieList += `
+  var UID = firebase.auth().currentUser.uid;
+  for (let each in data) {
+    var currentObj = data[each];
+    console.log(currentObj)
+    for (let key in currentObj) {
+      console.log(currentObj[key])
+      watchedMovieList += `
                   <div class="col-md-4 movieCard">
-                    <h3>Title</h3>
+                    <h3>Title: ${currentObj[key].Title}</h3>
                     <p>Year:</p>
                     <img class="img-responsive center-block" src= "" alt="Poster not available " />
                     <p>My Rating:</p>
                   </div>`
-
-
-  })
-  return watchedMovieList;
+    }
+    $("#watchedList").html (watchedMovieList);
+  }
 }

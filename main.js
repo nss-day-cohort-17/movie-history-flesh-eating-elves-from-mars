@@ -35,10 +35,16 @@ function movieFactory () {
     .then (function(data){
       resolve(data)
       console.log(data)
+
+
+      for(var i = 0; i < data.Search.length; i++){
+        if(data.Search[i].Title === current)
+      }
       card(data);
       $("#movieList").html (movieList);
       return data
-    })
+      })
+
     .then (function (data) {
       $(".movieCard").click(function (e){
         // console.log(e)
@@ -54,10 +60,10 @@ function movieFactory () {
 
           .then (function (data){
             resolve (data);
-            console.log(data)
+            console.log("LINE 57", data)
             modalCardBuilder(data)
             $("#movieList").html(modalCard)
-            watched(data)
+
           })
 
         })
@@ -83,7 +89,6 @@ function watched (data){
       dataType: "json"
     })
     alert("added to watched database");
-    movieFactory()
   })
 }
 
