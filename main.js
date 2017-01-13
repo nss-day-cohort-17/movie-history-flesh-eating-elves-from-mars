@@ -20,13 +20,23 @@ var UID;
 $(document).tooltip();
 //
 /* Search listener ===================================== */
-$("#search").click( function (e) {
+
+$("#target").submit( function (e) {
   movieName = $("#movieTitle").val();
   console.log(movieName);
-  e.preventDefault();
   movieFactory();
+  $("#movieTitle").val('');
+  e.preventDefault();
+});
 
-})
+
+// $("#search").click( function (e) {
+//   movieName = $("#movieTitle").val();
+//   console.log(movieName);
+//   e.preventDefault();
+//   movieFactory();
+// });
+
 //
 /* Ajax call for API =================================== */
 function movieFactory () {
