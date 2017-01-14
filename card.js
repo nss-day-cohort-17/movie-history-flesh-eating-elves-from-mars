@@ -44,6 +44,7 @@ function modalCardBuilder(data) {
 function watchedCard(data) {
   watchedMovieList = "";
   console.log("OBJECT: ",data)
+
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
@@ -61,7 +62,8 @@ function watchedCard(data) {
 
     }
 
-    $("#watchedList").html (watchedMovieList);
+
+
   }
 }
 }
@@ -71,12 +73,14 @@ function unWatchedCard(data) {
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
-    console.log(currentObj)
+    console.log(data.id)
     for (let key in currentObj) {
       console.log(currentObj[key])
 
+
        if (currentObj[key].watched === false ){
       unWatchedMovieList += `
+
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
                     <p>Year: ${currentObj[key].Year}</p>
@@ -85,7 +89,5 @@ function unWatchedCard(data) {
                   </div>`
 
     }
-    $("#toWatchList").html (unWatchedMovieList);
   }
-}
 }

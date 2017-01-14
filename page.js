@@ -49,8 +49,10 @@ $(document).ready(function() {
    console.log("unwatched movies screen");
     // var UID = firebase.auth().currentUser.uid;
    $(".card--toWatch").show();
+
    var UID = firebase.auth().currentUser.uid;
     $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
+
      console.log("Watched: ", data);
      unWatchedCard(data);
      // $("#toWatchList").html(unWatchedMovieList);
@@ -62,7 +64,9 @@ $(document).ready(function() {
    console.log("have watched movies screen");
     var UID = firebase.auth().currentUser.uid;
    $(".card--haveWatched").show();
+
    $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
+
      watchedCard(data);
      // $("#watchedList").html(watchedMovieList);
    })
