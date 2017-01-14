@@ -47,19 +47,22 @@ $(document).ready(function() {
  $("#findUnWatchedMovies").click(function(e) {
    $(".card").hide();
    console.log("unwatched movies screen");
+    // var UID = firebase.auth().currentUser.uid;
    $(".card--toWatch").show();
-    $.getJSON('https://fir-authent-jm.firebaseio.com/.json', function(data){
+   var UID = firebase.auth().currentUser.uid;
+    $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
      console.log("Watched: ", data);
      unWatchedCard(data);
-     $("#toWatchList").html(unWatchedMovieList);
+     // $("#toWatchList").html(unWatchedMovieList);
    })
  });
  /* findWatchedMovies button ====================================== */
  $("#findWatchedMovies").click(function(e) {
    $(".card").hide();
    console.log("have watched movies screen");
+    var UID = firebase.auth().currentUser.uid;
    $(".card--haveWatched").show();
-   $.getJSON('https://fir-authent-jm.firebaseio.com/.json', function(data){
+   $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
      watchedCard(data);
      // $("#watchedList").html(watchedMovieList);
    })
