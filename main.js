@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 //
 /* Globals ============================================= */
 var movieName ="";
+
 var UID;
 //$(document).tooltip();
 //
@@ -92,7 +93,7 @@ function watched (data){
     jsonData.rating = 0;
     console.log(jsonData)
     $.ajax({
-      url: `https://fir-authent-jm.firebaseio.com/ + ${UID} + .json`,
+      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
       type: "POST",
       data: JSON.stringify(data),
       dataType: "json"
@@ -108,7 +109,8 @@ $("#register").click ((e) => {
   var email = $(".getEmail").val();
   var password = $(".getPassword").val();
   if ((email !== "")&& (password !== "")){
-  firebase.auth().createUserWithEmailAndPassword(email,password)
+  firebase.auth().createUserWithEmailAndPassword(email,password);
+  $(".card--search").show();
 } else {
   alert("Registration Error")
 }
@@ -136,7 +138,7 @@ function unWatchedMovies (data) {
     jsonData.rating = 0;
     console.log(jsonData)
     $.ajax({
-      url: `https://fir-authent-jm.firebaseio.com/ + ${UID} + .json`,
+      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
       type: "POST",
       data: JSON.stringify(data),
       dataType: "json"
