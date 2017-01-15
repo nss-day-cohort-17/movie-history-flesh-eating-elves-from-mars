@@ -52,28 +52,24 @@ function watchedCard(data) {
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
-    console.log("Current object: ",currentObj);
-    var i = 0;
-    //for (let key in currentObj) {
-      i += 1;
-      console.log(i, currentObj);
-      console.log("TEST: ",currentObj.watched, UID);
-      if ((currentObj.watched === true) && (currentObj.uid === UID)){
-      watchedMovieList += `
-                  <div class="col-md-4 movieCard">
-                    <h3>Title: ${currentObj.Title}</h3>
-                    <p>Year: ${currentObj.Year}</p>
-                    <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
-                    <button id="delete" class="btn btn-danger">Delete from List</button>
-                  </div>`
-      }
-    //}
+    if ((currentObj.watched === true) && (currentObj.uid === UID)){
+    watchedMovieList += `
+                <div class="col-md-4 movieCard">
+                  <h3>Title: ${currentObj.Title}</h3>
+                  <p>Year: ${currentObj.Year}</p>
+                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
+                  <button id="delete" class="btn btn-danger">Delete from List</button>
+                </div>`
+    }
+    console.log(watchedMovieList)
+    if(watchedMovieList === ""){
+      watchedMovieList = `<h2 class="white">There are no movies on your watched list.</h2>`
+    }
   }
   return watchedMovieList;
 }
 function unWatchedCard(data) {
   unWatchedMovieList = "";
-  console.log("All Movies: ",data)
   if(data === null){
     unWatchedMovieList += `<h2 class="white">No unwatched movies on list.</h2>`
   }
@@ -81,21 +77,18 @@ function unWatchedCard(data) {
   var i = 0;
   for (let each in data) {
     var currentObj = data[each];
-    //for (let key in currentObj) {
-      if ((currentObj.watched === false) && (currentObj.uid === UID)){
-        i += 1;
-        console.log("Unwatched Movies: ",i,currentObj);
-        unWatchedMovieList += `
-                  <div class="col-md-4 movieCard">
-                    <h3>Title: ${currentObj.Title}</h3>
-                    <p>Year: ${currentObj.Year}</p>
-                    <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
-                    <button id="switchWatched">Watched</button>
-                  </div>`
-      }else{
-        //unWatchedMovieList += `<h2 class="white">No unwatched movies on list.</h2>`
-      }
-    //}
+    if ((currentObj.watched === false) && (currentObj.uid === UID)){
+      unWatchedMovieList += `
+                <div class="col-md-4 movieCard">
+                  <h3>Title: ${currentObj.Title}</h3>
+                  <p>Year: ${currentObj.Year}</p>
+                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
+                  <button class="switchWatched">Watched</button>
+                </div>`
+    }
+    if(watchedMovieList === ""){
+      watchedMovieList = `<h2 class="white">There are no movies on your watched list.</h2>`
+    }
   }
   return unWatchedMovieList;
 }

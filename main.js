@@ -143,16 +143,33 @@ function cancel (data) {
 /* Watched button on unwatched card ===================== */
 function switchWatched (data){
 
-  $("#switchWatched").click (function (e) {
+  $(".switchWatched").click (function (e) {
   console.log("Whats at switched button: ", data);
   console.log("Movie clicked on: ");
   console.log("Target",$(e.target));
   console.log("This",$(this))
-  for (let each in data) {
-    var currentObj = data[each];
+  $("#addToWatchList").click (function (e) {
+    UID = firebase.auth().currentUser.uid;
+    var jsonData = {}
+    jsonData = data;
+    jsonData.watched = true;
+    jsonData.rating = 0;
+    jsonData.uid = firebase.auth().currentUser.uid;
+    console.log(jsonData)
+    $.ajax({
+      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: "json"
+    })
+    alert("added to Watched database");
+    console.log( )
+  })
+  // for (let each in data) {
+  //   var currentObj = data[each];
+  //   console.log("After loop",currentObj);
+  // }
 
-  }
-  console.log("After loop",currentObj);
   // UID = firebase.auth().currentUser.uid;
   //   var jsonData = {}
   //   jsonData = data;
