@@ -148,62 +148,25 @@ function switchWatched (data){
   console.log("Movie clicked on: ");
   console.log("Target",$(e.target));
   console.log("This",$(this))
-  $("#addToWatchList").click (function (e) {
-    UID = firebase.auth().currentUser.uid;
-    var jsonData = {}
-    jsonData = data;
-    jsonData.watched = true;
-    jsonData.rating = 0;
-    jsonData.uid = firebase.auth().currentUser.uid;
-    console.log(jsonData)
-    $.ajax({
-      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
-      type: "POST",
-      data: JSON.stringify(data),
-      dataType: "json"
+    $("#addToWatchList").click (function (e) {
+      UID = firebase.auth().currentUser.uid;
+      var jsonData = {}
+      jsonData = data;
+      jsonData.watched = true;
+      jsonData.rating = 0;
+      jsonData.uid = firebase.auth().currentUser.uid;
+      console.log(jsonData)
+      $.ajax({
+        url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
+        type: "POST",
+        data: JSON.stringify(data),
+        dataType: "json"
+      })
+      alert("added to Watched database");
+      console.log( )
     })
-    alert("added to Watched database");
-    console.log( )
-  })
-  // for (let each in data) {
-  //   var currentObj = data[each];
-  //   console.log("After loop",currentObj);
-  // }
-
-  // UID = firebase.auth().currentUser.uid;
-  //   var jsonData = {}
-  //   jsonData = data;
-  //   jsonData.watched = true;
-  //   jsonData.rating = 0;
-  //   jsonData.uid = firebase.auth().currentUser.uid;
-  //   console.log(jsonData)
-  //   $.ajax({
-  //     url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
-  //     type: "POST",
-  //     data: JSON.stringify(data),
-  //     dataType: "json"
-  //   })
-  //   alert("added to watched database");
-  //   unWatchedMovies()
   })
 }
-//
-/* Watched button on unwatched card ===================== */
-// function switchWatched (data){
-//   console.log("Whats at switched button: ", data)
-//   $("#switchWatched").click(function (e){
-//     movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
-//     titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
-//     console.log("Watched button hit: ", titleURL)
-//     $.ajax ({
-//       watched: true
-//     })
-
-//     $("#toWatchList").html(unWatchedMovieList);
-//   })
-// }
-
-
 //
 /* Delete button on unwatched and watched card ========= */
 
