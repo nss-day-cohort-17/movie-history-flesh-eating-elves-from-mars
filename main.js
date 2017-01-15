@@ -82,7 +82,7 @@ function movieFactory () {
       })
     })
 
-})
+  })
 }
 //store json to watched database
 function watched (data){
