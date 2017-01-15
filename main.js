@@ -26,8 +26,8 @@ $("#register").click ((e) => {
   var email = $(".getEmail").val();
   var password = $(".getPassword").val();
   if ((email !== "")&& (password !== "")){
-  firebase.auth().createUserWithEmailAndPassword(email,password);
-  $(".card--search").show();
+    firebase.auth().createUserWithEmailAndPassword(email,password);
+    $(".card--search").show();
 } else {
   alert("Registration Error")
 }
@@ -141,10 +141,18 @@ function cancel (data) {
 }
 //
 /* Watched button on unwatched card ===================== */
-//function switchWatched (data){
+function switchWatched (data){
 
-  //$("#switchWatched").click (function (e) {
-  console.log("Whats at switched button: ", data)
+  $("#switchWatched").click (function (e) {
+  console.log("Whats at switched button: ", data);
+  console.log("Movie clicked on: ");
+  console.log("Target",$(e.target));
+  console.log("This",$(this))
+  for (let each in data) {
+    var currentObj = data[each];
+
+  }
+  console.log("After loop",currentObj);
   // UID = firebase.auth().currentUser.uid;
   //   var jsonData = {}
   //   jsonData = data;
@@ -159,24 +167,24 @@ function cancel (data) {
   //     dataType: "json"
   //   })
   //   alert("added to watched database");
-  //   movieFactory()
+  //   unWatchedMovies()
   })
 }
 //
 /* Watched button on unwatched card ===================== */
-function switchWatched (data){
-  console.log("Whats at switched button: ", data)
-  $("#switchWatched").click(function (e){
-    movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
-    titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
-    console.log("Watched button hit: ", titleURL)
-    $.ajax ({
-      watched: true
-    })
+// function switchWatched (data){
+//   console.log("Whats at switched button: ", data)
+//   $("#switchWatched").click(function (e){
+//     movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
+//     titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
+//     console.log("Watched button hit: ", titleURL)
+//     $.ajax ({
+//       watched: true
+//     })
 
-    $("#toWatchList").html(unWatchedMovieList);
-  })
-}
+//     $("#toWatchList").html(unWatchedMovieList);
+//   })
+// }
 
 
 //
