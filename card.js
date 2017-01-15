@@ -43,15 +43,15 @@ function modalCardBuilder(data) {
 }
 function watchedCard(data) {
   watchedMovieList = "";
-  console.log("OBJECT: ",data)
-
+  console.log("Watched Data: ",data)
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
-    console.log(currentObj)
+    console.log("Current object: ",currentObj);
+    console.log("This: ", this)
     for (let key in currentObj) {
-      console.log(currentObj[key])
-      if (currentObj[key].watched === true ){
+
+      if (currentObj.watched === true ){
       watchedMovieList += `
                   <div class="col-md-4 movieCard">
                     <h3>Title: ${currentObj[key].Title}</h3>
@@ -60,34 +60,8 @@ function watchedCard(data) {
                     <button id="" class="btn btn-danger">Delete from List</button>
                   </div>`
 
-    }
-
-
-
-  }
-}
-}
-
-function unWatchedCard(data) {
-  unWatchedMovieList = "";
-  var UID = firebase.auth().currentUser.uid;
-  for (let each in data) {
-    var currentObj = data[each];
-    console.log(data.id)
-    for (let key in currentObj) {
-      console.log(currentObj[key])
-
-
-       if (currentObj[key].watched === false ){
-      unWatchedMovieList += `
-
-                  <div class="col-md-4 movieCard">
-                    <h3>Title: ${currentObj[key].Title}</h3>
-                    <p>Year: ${currentObj[key].Year}</p>
-                    <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
-                    <button id="" class="btn btn-primary">Watched</button>
-                  </div>`
-
+      }
     }
   }
+  return watchedMovieList;
 }
