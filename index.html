@@ -39,12 +39,14 @@
           <div class="row">
             <div class="col-md-6">
               <h1 class="topMargin white">MyMovies&trade;</h1>
-              <p class="white">MyMovie&trade; is an application that allows you to register for a unique account, add movies that you are interested in, and sort them by watched and unwatched. There is also a feature to allow you to rate individual movies form 0 to 5.</p>
+              <p class="white">MyMovie&trade; is an application that allows you to register for a unique account, add movies that you are interested in, and sort them by watched and unwatched.</p>
               <form>
-                <input type="email" class="getEmail">
-                <input type="password" class="getPassword">
-                <button type="button" id="login" class="btn btn-default navbar-btn">Login</button>
-                <button type="button" id="register" class="btn btn-default navbar-btn">Register</button>
+                <label class="white" for="email">Email:</label>
+                <input type="email" class="getEmail"><br>
+                <label class="white" for="password">Password:</label>
+                <input type="password" class="getPassword"><br>
+                <button type="button" id="login" class="btn btn-primary">Login</button>
+                <button type="button" id="register" class="btn btn-success">Register</button>
               </form>
             </div>
             <div class="col-md-6">
@@ -136,6 +138,8 @@
           <!-- <script type="text/javascript" src="/bower_components/lodash/dist/lodash.js"></script> -->
           <script src="jquery.modal.js" type="text/javascript" charset="utf-8"></script>
           <script src="card.js"></script>
+
+
           <script src="page.js"></script>
           <script src="main.js"></script>
         </body>

@@ -13,7 +13,6 @@ $(document).ready(function() {
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
     var moveAlong = false;
-
     switch (nextCard) {
       case "card--search":
         moveAlong = true;
@@ -25,7 +24,6 @@ $(document).ready(function() {
         moveAlong = true;
       break;
     }
-
     if (moveAlong) {
       $(".card").hide();
       $("." + nextCard).show();
@@ -34,31 +32,21 @@ $(document).ready(function() {
   /* findNewMovies button ========================================== */
   $("#findNewMovies").click(function(e) {
     $(".card").hide();
-    console.log("find new movies screen");
+    console.log("Search for new movies.");
     $(".card--search").show();
     $("#movieList").empty();
   });
   /* findUnWatchedMovies button ==================================== */
   $("#findUnWatchedMovies").click(function(e) {
     $(".card").hide();
-    console.log("unwatched movies screen");
+    console.log("Unwatched movies.");
     $(".card--toWatch").show();
-    return new Promise (function (resolve,reject){
-      var UID = firebase.auth().currentUser.uid;
-      $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
-        unWatchedCard(data);
-        $("#toWatchList").html(unWatchedMovieList);
-      })
-      .then (function(data){
-        switchWatched(data);
-      return data
-    })
-  })
-});
+    unWatchedMovieFactory();
+  });
   /* findWatchedMovies button ====================================== */
   $("#findWatchedMovies").click(function(e) {
     $(".card").hide();
-    console.log("have watched movies screen");
+    console.log("Watched movies.");
     $(".card--haveWatched").show();
     var UID = firebase.auth().currentUser.uid;
     $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
@@ -70,7 +58,6 @@ $(document).ready(function() {
   $("#loginPage").click(function(e) {
     $(".card").hide();
     $('#main-nav').hide();
-    console.log("card hidden");
     $("#title-screen").show();
     firebase.auth().signOut();
   });
@@ -79,7 +66,7 @@ $(document).ready(function() {
     //if(firebase.auth().currentUser.uid !== null){
       $(".card").hide();
       $('#main-nav').show();
-      console.log("card hidden");
+      console.log("Login.");
       $(".card--search").show();
     //}
   });
@@ -90,6 +77,7 @@ $(document).ready(function() {
     var watchedMovieList = "";
     var unWatchedMovieList = "";
     firebase.auth().signOut();
+    console.log("Logout.")
   })
 })
 

@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 //
 /* Globals ============================================= */
 var movieName ="";
+var movieTitle;
 var UID;
 //
 /* Listeners =========================================== */
@@ -50,7 +51,6 @@ $("#login").click((e)=>{
 /* Search for new movies ================================ */
 $("#target").submit( function (e) {
   movieName = $("#movieTitle").val();
-  console.log(movieName);
   movieFactory();
   $("#movieTitle").val('');
   e.preventDefault();
@@ -68,7 +68,7 @@ function movieFactory () {
       card(data);
       $("#movieList").html (movieList);
       return data
-      })
+    })
     .then (function (data) {
       $(".movieCard").click(function (e){ // click on card to see more info
         movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
@@ -79,7 +79,6 @@ function movieFactory () {
           })
           .then (function (data){
             resolve (data);
-            console.log(data);
             modalCardBuilder(data);
             $("#movieList").html(modalCard);
             watched (data);
@@ -87,6 +86,36 @@ function movieFactory () {
             cancel();
           })
         })
+      })
+    })
+  })
+}
+//
+/* UnWatched Movie Selector =========================== */
+function unWatchedMovieFactory(data) {
+  $("#toWatchList").empty();
+  return new Promise (function (resolve,reject){
+    var UID = firebase.auth().currentUser.uid;
+    $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
+      unWatchedCard(data);
+      $("#toWatchList").html(unWatchedMovieList);
+    })
+    .then (function(data){
+      $(".movieCard").click(function (e){ // click on card to see more info
+        var mObj; // holds movie obj
+        var mid; // holds movie key
+        movieTitle = e.target.parentNode.childNodes[1].innerHTML;
+        for (let each in data) {
+          var currentObj = data[each];
+          if (currentObj.Title === movieTitle){
+            mObj = currentObj;
+            mid = each;
+            unWatchedModalCardBuilder(mObj);
+          }
+        }
+        $("#toWatchList").html(modalCard);
+        switchWatched(data);
+        cancelUnwatched();
       })
     })
   })
@@ -101,7 +130,6 @@ function watched (data){
     jsonData.watched = true;
     jsonData.rating = 0;
     jsonData.uid = firebase.auth().currentUser.uid;
-    console.log(jsonData)
     $.ajax({
       url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
       type: "POST",
@@ -122,7 +150,6 @@ function unWatchedMovies (data) {
     jsonData.watched = false;
     jsonData.rating = 0;
     jsonData.uid = firebase.auth().currentUser.uid;
-    console.log(jsonData)
     $.ajax({
       url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
       type: "POST",
@@ -142,31 +169,40 @@ function cancel (data) {
 //
 /* Watched button on unwatched card ===================== */
 function switchWatched (data){
-
   $(".switchWatched").click (function (e) {
-  console.log("Whats at switched button: ", data);
-  console.log("Movie clicked on: ");
-  console.log("Target",$(e.target));
-  console.log("This",$(this))
-    $("#addToWatchList").click (function (e) {
-      UID = firebase.auth().currentUser.uid;
-      var jsonData = {}
-      jsonData = data;
-      jsonData.watched = true;
-      jsonData.rating = 0;
-      jsonData.uid = firebase.auth().currentUser.uid;
-      console.log(jsonData)
-      $.ajax({
-        url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
-        type: "POST",
-        data: JSON.stringify(data),
-        dataType: "json"
-      })
-      alert("added to Watched database");
-      console.log( )
+    var mObj; // holds movie obj
+    var mid; // holds movie key
+    for (let each in data) {
+      var currentObj = data[each];
+      console.log("currentObj/Title: ",movieTitle)
+      if (currentObj.Title === movieTitle){
+        mObj = currentObj;
+        mid = each;
+      }
+    }
+    UID = firebase.auth().currentUser.uid;
+    mObj.watched = true;
+    $.ajax({
+      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
+      type: "PATCH",
+      data: JSON.stringify(data),
+      dataType: "json"
     })
+    mobj = "";
+    $("#toWatchList").empty();
+    unWatchedMovieFactory();
+
+  })
+
+
+}
+/* Cancel button on popout card ===================== */
+function cancelUnwatched (data) {
+  $("#cancelUnwatched").click (function (e) {
+    unWatchedMovieFactory();
   })
 }
+//
 //
 /* Delete button on unwatched and watched card ========= */
 
