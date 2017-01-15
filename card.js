@@ -36,8 +36,7 @@ function modalCardBuilder(data) {
                   <p>Cast: ${data.Actors}
                   <img class="img-responsive center-block" src= ${data.Poster} alt="Poster not available " />
                   <button id="watched">Watched</button><button id="addToWatchList">Add to WatchList</button><button id="cancel">Cancel</button>
-                </div>
-                `
+                </div>`
   return modalCard;
 }
 function watchedCard(data) {
@@ -50,15 +49,19 @@ function watchedCard(data) {
                 <div class="col-md-4 movieCard">
                   <h3>Title: ${currentObj.Title}</h3>
                   <p>Year: ${currentObj.Year}</p>
-                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
+                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available" />
                 </div>`
     }
   }
   if(watchedMovieList === ""){
-    watchedMovieList = `<h2 class="white">There are no movies on your watched list.</h2>`
+    watchedMovieList = `<div class="col-md-12">
+                        <h2 class="white">There are no movies on your watched list.</h2>
+                        </div>`
   }
   if(watchedMovieList === null){
-    watchedMovieList = `<h2 class="white">There are no movies on your watched list.</h2>`
+    watchedMovieList = `<div class="col-md-12">
+                        <h2 class="white">There are no movies on your watched list.</h2>
+                        </div>`
   }
   return watchedMovieList;
 }
@@ -74,15 +77,19 @@ function unWatchedCard(data) {
                 <div class="col-md-4 movieCard">
                   <h3>${currentObj.Title}</h3>
                   <p>Year: ${currentObj.Year}</p>
-                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available "/>
+                  <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available"/>
                 </div>`
     }
   }
   if(unWatchedMovieList === ""){
-    unWatchedMovieList = `<h2 class="white">There are no movies on your to watch list.</h2>`
+    unWatchedMovieList = `<div class="col-md-12">
+                          <h2 class="white">There are no movies on your unwatched list.</h2>
+                          </div>`
   }
   if(unWatchedMovieList === null){
-    unWatchedMovieList = `<h2 class="white">There are no movies on your to watch list.</h2>`
+    unWatchedMovieList = `<div class="col-md-12">
+                          <h2 class="white">There are no movies on your unwatched list.</h2>
+                          </div>`
   }
   return unWatchedMovieList;
 }
