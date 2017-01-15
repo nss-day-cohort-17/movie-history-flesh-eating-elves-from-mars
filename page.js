@@ -30,59 +30,75 @@ $(document).ready(function() {
       $(".card").hide();
       $("." + nextCard).show();
     }
- });
+  });
 /* When the back button clicked, move back a view */
 // $(".card__back").click(function(e) {
 //   var previousCard = $(this).attr("previous");
 //   $(".card").hide();
 //   $("." + previousCard).show();
 // });
-/* findNewMovies button ========================================== */
-$("#findNewMovies").click(function(e) {
+  /* findNewMovies button ========================================== */
+  $("#findNewMovies").click(function(e) {
     $(".card").hide();
     console.log("find new movies screen");
     $(".card--search").show();
-});
-/* findUnWatchedMovies button ==================================== */
-$("#findUnWatchedMovies").click(function(e) {
-  $(".card").hide();
-  console.log("unwatched movies screen");
-  $(".card--toWatch").show();
-  var UID = firebase.auth().currentUser.uid;
-  $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
-    unWatchedCard(data);
-    $("#toWatchList").html(unWatchedMovieList);
-  })
- });
-/* findWatchedMovies button ====================================== */
-$("#findWatchedMovies").click(function(e) {
-  $(".card").hide();
-  console.log("have watched movies screen");
-  $(".card--haveWatched").show();
-  var UID = firebase.auth().currentUser.uid;
-  $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
-    watchedCard(data);
-    $("#watchedList").html(watchedMovieList);
+    $("#movieList").empty();
+  });
+  /* findUnWatchedMovies button ==================================== */
+  $("#findUnWatchedMovies").click(function(e) {
+    $(".card").hide();
+    console.log("unwatched movies screen");
+    $(".card--toWatch").show();
+    return new Promise (function (resolve,reject){
+      var UID = firebase.auth().currentUser.uid;
+      $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
+        unWatchedCard(data);
+        $("#toWatchList").html(unWatchedMovieList);
+      })
+      .then (function(data){
+        switchWatched(data);
+      return data
+    })
   })
 });
-/* login page button ============================================= */
-$("#loginPage").click(function(e) {
-  $(".card").hide();
-  $('#main-nav').hide();
-  console.log("card hidden");
-  $("#title-screen").show();
-  firebase.auth().signOut();
-});
-/* login button ================================================== */
-$("#login").click(function(e) {
-  $(".card").hide();
-  $('#main-nav').show();
-  console.log("card hidden");
-  $(".card--search").show();
-});
- /* logout button ================================================== */
- $('#logout').click((e) => {
- firebase.auth().signOut();
- })
+  /* findWatchedMovies button ====================================== */
+  $("#findWatchedMovies").click(function(e) {
+    $(".card").hide();
+    console.log("have watched movies screen");
+    $(".card--haveWatched").show();
+    var UID = firebase.auth().currentUser.uid;
+    $.getJSON(`https://fir-authent-jm.firebaseio.com/${UID}.json`, function(data){
+      watchedCard(data);
+      $("#watchedList").html(watchedMovieList);
+    })
+  });
+  /* login page button ============================================= */
+  $("#loginPage").click(function(e) {
+    $(".card").hide();
+    $('#main-nav').hide();
+    console.log("card hidden");
+    $("#title-screen").show();
+    firebase.auth().signOut();
+  });
+  /* login button ================================================== */
+  $("#login").click(function(e) {
+    $(".card").hide();
+    $('#main-nav').show();
+    console.log("card hidden");
+    $(".card--search").show();
+  });
+  /* logout button ================================================== */
+  $('#logout').click((e) => {
+    var movieList = "";
+    var modalCard = "";
+    var watchedMovieList = "";
+    var unWatchedMovieList = "";
+    firebase.auth().signOut();
+  })
 })
+
+
+
+
+
 //END

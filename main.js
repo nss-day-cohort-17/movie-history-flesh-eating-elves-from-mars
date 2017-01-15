@@ -16,94 +16,11 @@ firebase.initializeApp(config);
 //
 /* Globals ============================================= */
 var movieName ="";
-
 var UID;
-//$(document).tooltip();
 //
-/* Search listener ===================================== */
-
-$("#target").submit( function (e) {
-  movieName = $("#movieTitle").val();
-  console.log(movieName);
-  movieFactory();
-  $("#movieTitle").val('');
-  e.preventDefault();
-});
-
-
-// $("#search").click( function (e) {
-//   movieName = $("#movieTitle").val();
-//   console.log(movieName);
-//   e.preventDefault();
-//   movieFactory();
-// });
-
+/* Listeners =========================================== */
 //
-/* Ajax call for API =================================== */
-function movieFactory () {
-  return new Promise (function (resolve,reject){
-    $.ajax({
-      url: "http://www.omdbapi.com/?s=" + movieName
-    })
-    .then (function(data){
-      resolve(data)
-      console.log(data)
-      card(data);
-      $("#movieList").html (movieList);
-      return data
-      })
-
-    .then (function (data) {
-      $(".movieCard").click(function (e){
-        // console.log(e)
-        // console.log(e.target.parentNode.childNodes[1].innerHTML )
-        // console.log("hi")
-        movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
-
-        titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
-        return new Promise (function (resolve,reject){
-          $.ajax ({
-            url: titleURL
-          })
-
-          .then (function (data){
-            resolve (data);
-            console.log(data)
-            modalCardBuilder(data)
-            $("#movieList").html(modalCard)
-            watched (data)
-            unWatchedMovies(data);
-
-
-          })
-
-        })
-
-      })
-    })
-
-  })
-}
-//store json to watched database
-function watched (data){
-  $("#watched").click (function (e) {
-    var jsonData = {}
-    jsonData = data;
-    jsonData.watched = true;
-    jsonData.rating = 0;
-    console.log(jsonData)
-    $.ajax({
-      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
-      type: "POST",
-      data: JSON.stringify(data),
-      dataType: "json"
-    })
-    alert("added to watched database");
-    movieFactory()
-  })
-}
-
-//register button working
+/* Register button ===================================== */
 $("#register").click ((e) => {
   e.preventDefault();
   var email = $(".getEmail").val();
@@ -115,7 +32,8 @@ $("#register").click ((e) => {
   alert("Registration Error")
 }
 })
-//login button
+//
+/* Login button ======================================== */
 $("#login").click((e)=>{
   e.preventDefault();
   var email = $(".getEmail").val();
@@ -128,14 +46,82 @@ $("#login").click((e)=>{
     UID = firebase.auth().currentUser.uid;
   })
 })
-//add event listener for unwatched movies
-
+//
+/* Search for new movies ================================ */
+$("#target").submit( function (e) {
+  movieName = $("#movieTitle").val();
+  console.log(movieName);
+  movieFactory();
+  $("#movieTitle").val('');
+  e.preventDefault();
+});
+//
+/* Ajax call for movie API ============================== */
+function movieFactory () {
+  return new Promise (function (resolve,reject){
+    $.ajax({
+      url: "http://www.omdbapi.com/?s=" + movieName
+    })
+    .then (function(data){
+      resolve(data)
+      console.log(data)
+      card(data);
+      $("#movieList").html (movieList);
+      return data
+      })
+    .then (function (data) {
+      $(".movieCard").click(function (e){ // click on card to see more info
+        movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
+        titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
+        return new Promise (function (resolve,reject){
+          $.ajax ({
+            url: titleURL
+          })
+          .then (function (data){
+            resolve (data);
+            console.log(data);
+            modalCardBuilder(data);
+            $("#movieList").html(modalCard);
+            watched (data);
+            unWatchedMovies(data);
+            cancel();
+          })
+        })
+      })
+    })
+  })
+}
+//
+/* Watched button on popout card ======================= */
+function watched (data){
+  $("#watched").click (function (e) {
+    UID = firebase.auth().currentUser.uid;
+    var jsonData = {}
+    jsonData = data;
+    jsonData.watched = true;
+    jsonData.rating = 0;
+    jsonData.uid = firebase.auth().currentUser.uid;
+    console.log(jsonData)
+    $.ajax({
+      url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
+      type: "POST",
+      data: JSON.stringify(data),
+      dataType: "json"
+    })
+    alert("added to watched database");
+    movieFactory()
+  })
+}
+//
+/* Unwatched button on popout card ===================== */
 function unWatchedMovies (data) {
   $("#addToWatchList").click (function (e) {
+    UID = firebase.auth().currentUser.uid;
     var jsonData = {}
     jsonData = data;
     jsonData.watched = false;
     jsonData.rating = 0;
+    jsonData.uid = firebase.auth().currentUser.uid;
     console.log(jsonData)
     $.ajax({
       url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
@@ -144,6 +130,72 @@ function unWatchedMovies (data) {
       dataType: "json"
     })
     alert("added to Unwatched database");
-    movieFactory()
+    movieFactory();
   })
 }
+/* Cancel button on popout card ===================== */
+function cancel (data) {
+  $("#cancel").click (function (e) {
+    movieFactory();
+  })
+}
+//
+/* Watched button on unwatched card ===================== */
+//function switchWatched (data){
+
+  //$("#switchWatched").click (function (e) {
+  console.log("Whats at switched button: ", data)
+  // UID = firebase.auth().currentUser.uid;
+  //   var jsonData = {}
+  //   jsonData = data;
+  //   jsonData.watched = true;
+  //   jsonData.rating = 0;
+  //   jsonData.uid = firebase.auth().currentUser.uid;
+  //   console.log(jsonData)
+  //   $.ajax({
+  //     url: `https://fir-authent-jm.firebaseio.com/${UID}.json`,
+  //     type: "POST",
+  //     data: JSON.stringify(data),
+  //     dataType: "json"
+  //   })
+  //   alert("added to watched database");
+  //   movieFactory()
+  })
+}
+//
+/* Watched button on unwatched card ===================== */
+function switchWatched (data){
+  console.log("Whats at switched button: ", data)
+  $("#switchWatched").click(function (e){
+    movieTitle = e.target.parentNode.childNodes[1].innerHTML ;
+    titleURL = "http://www.omdbapi.com/?t=" + movieTitle +"&y=&plot=short&r=json"
+    console.log("Watched button hit: ", titleURL)
+    $.ajax ({
+      watched: true
+    })
+
+    $("#toWatchList").html(unWatchedMovieList);
+  })
+}
+
+
+//
+/* Delete button on unwatched and watched card ========= */
+
+
+//
+/* Search on unwatched and watched pages card ========== */
+
+// $("#search").click( function (e) {
+//   movieName = $("#movieTitle").val();
+//   console.log(movieName);
+//   e.preventDefault();
+//   movieFactory();
+// });
+
+
+
+
+
+
+//END

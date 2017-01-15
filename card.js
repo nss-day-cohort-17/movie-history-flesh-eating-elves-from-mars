@@ -8,7 +8,8 @@ James Wier
 /* Global Variables ============================================ */
 var movieList = "";
 var modalCard = "";
-
+var watchedMovieList;
+var unWatchedMovieList;
 //
 /* Card template =============================================== */
 function card(data) {
@@ -37,31 +38,64 @@ function modalCardBuilder(data) {
                   <p>Rating: ${data.imdbRating}
                   <p>Cast: ${data.Actors}
                   <img class="img-responsive center-block" src= ${data.Poster} alt="Poster not available " />
+                  <button id="watched">Watched</button><button id="addToWatchList">Add to WatchList</button><button id="cancel">Cancel</button>
                 </div>
-                <button id="watched">Watched</button> <button id="addToWatchList">Add to WatchList</button>`
+                `
   return modalCard;
 }
 function watchedCard(data) {
   watchedMovieList = "";
   console.log("Watched Data: ",data)
+  if(data === null){
+    watchedMovieList += `<h2 class="white">No watched movies on list.</h2>`
+  }
   var UID = firebase.auth().currentUser.uid;
   for (let each in data) {
     var currentObj = data[each];
     console.log("Current object: ",currentObj);
-    console.log("This: ", this)
-    for (let key in currentObj) {
-
-      if (currentObj.watched === true ){
+    var i = 0;
+    //for (let key in currentObj) {
+      i += 1;
+      console.log(i, currentObj);
+      console.log("TEST: ",currentObj.watched, UID);
+      if ((currentObj.watched === true) && (currentObj.uid === UID)){
       watchedMovieList += `
                   <div class="col-md-4 movieCard">
-                    <h3>Title: ${currentObj[key].Title}</h3>
-                    <p>Year: ${currentObj[key].Year}</p>
-                    <img class="img-responsive center-block" src= "${currentObj[key].Poster}" alt="Poster not available " />
-                    <button id="" class="btn btn-danger">Delete from List</button>
+                    <h3>Title: ${currentObj.Title}</h3>
+                    <p>Year: ${currentObj.Year}</p>
+                    <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
+                    <button id="delete" class="btn btn-danger">Delete from List</button>
                   </div>`
-
       }
-    }
+    //}
   }
   return watchedMovieList;
+}
+function unWatchedCard(data) {
+  unWatchedMovieList = "";
+  console.log("All Movies: ",data)
+  if(data === null){
+    unWatchedMovieList += `<h2 class="white">No unwatched movies on list.</h2>`
+  }
+  var UID = firebase.auth().currentUser.uid;
+  var i = 0;
+  for (let each in data) {
+    var currentObj = data[each];
+    //for (let key in currentObj) {
+      if ((currentObj.watched === false) && (currentObj.uid === UID)){
+        i += 1;
+        console.log("Unwatched Movies: ",i,currentObj);
+        unWatchedMovieList += `
+                  <div class="col-md-4 movieCard">
+                    <h3>Title: ${currentObj.Title}</h3>
+                    <p>Year: ${currentObj.Year}</p>
+                    <img class="img-responsive center-block" src= "${currentObj.Poster}" alt="Poster not available " />
+                    <button id="switchWatched">Watched</button>
+                  </div>`
+      }else{
+        //unWatchedMovieList += `<h2 class="white">No unwatched movies on list.</h2>`
+      }
+    //}
+  }
+  return unWatchedMovieList;
 }
