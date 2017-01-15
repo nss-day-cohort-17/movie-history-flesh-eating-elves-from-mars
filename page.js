@@ -54,7 +54,7 @@ $(document).ready(function() {
       $("#watchedList").html(watchedMovieList);
     })
   });
-  /* login page button ============================================= */
+  /* logout page button ============================================= */
   $("#loginPage").click(function(e) {
     $(".card").hide();
     $('#main-nav').hide();
@@ -63,12 +63,12 @@ $(document).ready(function() {
   });
   /* login button ================================================== */
   $("#login").click(function(e) {
-    //if(firebase.auth().currentUser.uid !== null){
+    if(firebase.auth().currentUser.uid !== null){
       $(".card").hide();
       $('#main-nav').show();
       console.log("Login.");
       $(".card--search").show();
-    //}
+    }
   });
   /* logout button ================================================== */
   $('#logout').click((e) => {
