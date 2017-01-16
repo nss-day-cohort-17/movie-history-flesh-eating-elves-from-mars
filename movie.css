@@ -29,12 +29,20 @@ James Wier
 .titleBar{ /* H1 on each page */
   margin-bottom: 40px;
   padding-bottom: 20px;
+  padding-top: 10px;
 }
 #movieTitle{ /* Input field for search */
   width: 300px;
 }
 .topMargin{ /* A spacer */
   margin-top: 40px;
+}
+.mCard{
+  padding:20px;
+}
+.btn{
+  margin-top: 10px;
+  padding: none;
 }
 /* Skin ============================== */
 body {
@@ -51,5 +59,10 @@ body {
 }
 .white{
   color:rgba(236, 240, 241,1.0);
+}
+.mCard{
+  background-color: white;
+  border: 2px solid rgba(41, 128, 185,1.0);
+  border-radius: 10px;
 }
 /* Breakpoints ============================== */

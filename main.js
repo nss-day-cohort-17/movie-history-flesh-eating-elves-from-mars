@@ -39,6 +39,7 @@ $("#login").click((e)=>{
   e.preventDefault();
   var email = $(".getEmail").val();
   var password = $(".getPassword").val();
+  e.preventDefault();
   firebase
   .auth()
   .signInWithEmailAndPassword(email, password)
@@ -64,7 +65,6 @@ function movieFactory () {
     })
     .then (function(data){
       resolve(data)
-      console.log(data)
       card(data);
       $("#movieList").html (movieList);
       return data
@@ -174,7 +174,7 @@ function switchWatched (data){
     var mid; // holds movie key
     for (let each in data) {
       var currentObj = data[each];
-      console.log("currentObj/Title: ",movieTitle)
+      console.log("currentObj/Title: ",movieTitle, mObj)
       if (currentObj.Title === movieTitle){
         mObj = currentObj;
         mid = each;
@@ -188,15 +188,13 @@ function switchWatched (data){
       data: JSON.stringify(data),
       dataType: "json"
     })
-    mobj = "";
-    $("#toWatchList").empty();
+    console.log(mObj)
+    mObj = "";
     unWatchedMovieFactory();
-
   })
-
-
 }
-/* Cancel button on popout card ===================== */
+//
+/* Cancel button on popout card ======================== */
 function cancelUnwatched (data) {
   $("#cancelUnwatched").click (function (e) {
     unWatchedMovieFactory();
@@ -204,22 +202,14 @@ function cancelUnwatched (data) {
 }
 //
 //
+//
 /* Delete button on unwatched and watched card ========= */
-
-
 //
 /* Search on unwatched and watched pages card ========== */
-
 // $("#search").click( function (e) {
 //   movieName = $("#movieTitle").val();
 //   console.log(movieName);
 //   e.preventDefault();
 //   movieFactory();
 // });
-
-
-
-
-
-
 //END

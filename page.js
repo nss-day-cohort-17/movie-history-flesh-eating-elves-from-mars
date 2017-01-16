@@ -9,6 +9,11 @@ $(document).ready(function() {
   /* Show the initial registration page ========================== */
   $("#title-screen").show();
   $('#main-nav').hide();
+  // if(firebase.auth().curentUser.uid !== null){
+  //   $("#title-screen").hide();
+  //   $(".card--search").show();
+  //   $('#main-nav').show();
+  // }
   /* When any button with card__link class is clicked, move on to the next view. */
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
@@ -41,6 +46,7 @@ $(document).ready(function() {
     $(".card").hide();
     console.log("Unwatched movies.");
     $(".card--toWatch").show();
+    $('toWatchList').empty();
     unWatchedMovieFactory();
   });
   /* findWatchedMovies button ====================================== */
@@ -68,6 +74,9 @@ $(document).ready(function() {
       $('#main-nav').show();
       console.log("Login.");
       $(".card--search").show();
+    }else{
+      $("#title-screen").show();
+      $('#main-nav').hide();
     }
   });
   /* logout button ================================================== */
